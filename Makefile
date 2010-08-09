@@ -1,6 +1,6 @@
 APXS=apxs
-# APXS_FLAGS=-Wc,-Wall -Wc,-g -Wc,-O3 -Wl,-lcurl
-APXS_FLAGS=-Wc,-Wall -Wc,-g -Wc,-O0 -Wl
+APXS_FLAGS=-Wc,-Wall -Wc,-g -Wc,-O3 -Wl,-lcurl
+# APXS_FLAGS=-Wc,-Wall -Wc,-g -Wc,-O0
 
 TARGET=mod_multicast_index.slo
 SRC=mod_multicast_index.c

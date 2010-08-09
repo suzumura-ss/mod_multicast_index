@@ -9,11 +9,13 @@ Usage:
   * Enable the module:
       SetHandler X-Multicast-Index
       X-Multicast-Index 192.168.183.219 239.192.1.1 30109
+    1st parameter: Multicast interface address.
+    2nd parameter: Multicast address.
+    3rd parameter: Multicast port.
 
   * Multicast basket state.
       (GET|HEAD) /url_from/path_to_dir/
-      X-Multicast-Index_200: ["1.1","C","INSERT",{"basket":"123456789.1.1.1","host":"std100",\
-                              "path":"/expdsk/1/a/0/123/456/123456789.1.1.1"}]
-      X-Multicast-Index_404: ["1.1","C","DROP", {"basket":"123456789.1.1.1","host":"std100",\
-                              "path":"/expdsk/1/a/0/123/456/123456789.1.1.1"}]
+      X-Multicast-Index_200: 200%r%nOK%r%n
+      X-Multicast-Index_404: 404%r%nNotFound%r%n
+    "%r" is replaced to "\r", "%n" is replaced to "\n".
     Return "200 OK" when found, "404 Not Found" wnen not found.

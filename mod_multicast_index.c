@@ -65,10 +65,32 @@ typedef struct {
 // Main functions.
 //
 
+static char* unescape_specialchars(apr_pool_t* pool, const char* str)
+{
+  char* p, *r = apr_pstrdup(pool, str);
+  for(p=r; p[0]!='\0'; p++) {
+    if((p[0]=='%') && (p[1]!='\0')) {
+      switch(p[1]) {
+      case 'r':
+        p[0]='\r';  break;
+      case 'n':
+        p[0]='\n';  break;
+      default:
+        break;
+      }
+      memmove(p+1, p+2, strlen(p+1));
+    }
+  }
+  return r;
+}
+
 // Multicast packet.
 static apr_status_t multicast_packet(request_rec* rec, multicast_conf* conf, const char* _msg)
 {
   int r, s = socket(AF_INET, SOCK_DGRAM, 0);
+  char* msg = unescape_specialchars(rec->pool, _msg);
+
+  AP_LOG_DEBUG(rec, "unescaped string: %s", msg);
 
   r = setsockopt(s, SOL_IP, IP_MULTICAST_IF, conf->multicast_interface.addr, conf->multicast_interface.len);
   if(r!=0) {
@@ -84,7 +106,7 @@ static apr_status_t multicast_packet(request_rec* rec, multicast_conf* conf, con
     goto FINALLY;
   }
 
-  r = send(s, _msg, strlen(_msg), 0);
+  r = send(s, msg, strlen(msg), 0);
   r = (r>=0)? APR_SUCCESS: errno;
 
 FINALLY:
@@ -161,7 +183,6 @@ static int multicast_index_handler(request_rec *rec)
   }
   apr_dir_close(dir);
 
-  status = multicast_200_ok(rec, conf);
   return multicast_200_ok(rec, conf);
 }
 
