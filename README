@@ -1,0 +1,19 @@
+mod_multicast_index 0.1.0
+
+This module adds index handler to Apache/2.x.
+
+To install:
+  sudo make install
+
+Usage:
+  * Enable the module:
+      SetHandler X-Multicast-Index
+      X-Multicast-Index 192.168.183.219 239.192.1.1 30109
+
+  * Multicast basket state.
+      (GET|HEAD) /url_from/path_to_dir/
+      X-Multicast-Index_200: ["1.1","C","INSERT",{"basket":"123456789.1.1.1","host":"std100",\
+                              "path":"/expdsk/1/a/0/123/456/123456789.1.1.1"}]
+      X-Multicast-Index_404: ["1.1","C","DROP", {"basket":"123456789.1.1.1","host":"std100",\
+                              "path":"/expdsk/1/a/0/123/456/123456789.1.1.1"}]
+    Return "200 OK" when found, "404 Not Found" wnen not found.
