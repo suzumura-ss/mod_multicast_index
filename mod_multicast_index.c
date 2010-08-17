@@ -42,9 +42,9 @@ static const char X_INDEX_404[] = MULTICAST_INDEX "_404";
 module AP_MODULE_DECLARE_DATA multicast_index_module;
 
 #define AP_LOG_DEBUG(rec, fmt, ...) ap_log_rerror(APLOG_MARK, APLOG_DEBUG, 0, rec, fmt, ##__VA_ARGS__)
-#define AP_LOG_INFO(rec, fmt, ...) ap_log_rerror(APLOG_MARK, APLOG_INFO, 0, rec, "[upload] " fmt, ##__VA_ARGS__)
-#define AP_LOG_WARN(rec, fmt, ...) ap_log_rerror(APLOG_MARK, APLOG_WARNING,0, rec, "[upload] " fmt, ##__VA_ARGS__)
-#define AP_LOG_ERR(rec, fmt, ...) ap_log_rerror(APLOG_MARK, APLOG_ERR, 0, rec, "[upload] " fmt, ##__VA_ARGS__)
+#define AP_LOG_INFO(rec, fmt, ...) ap_log_rerror(APLOG_MARK, APLOG_INFO, 0, rec, "[multicast_idx] " fmt, ##__VA_ARGS__)
+#define AP_LOG_WARN(rec, fmt, ...) ap_log_rerror(APLOG_MARK, APLOG_WARNING,0, rec, "[multicast_idx] " fmt, ##__VA_ARGS__)
+#define AP_LOG_ERR(rec, fmt, ...) ap_log_rerror(APLOG_MARK, APLOG_ERR, 0, rec, "[multicast_idx] " fmt, ##__VA_ARGS__)
 
 
 // Config store
